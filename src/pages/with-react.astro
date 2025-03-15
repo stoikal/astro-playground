@@ -11,10 +11,11 @@ name();
 
 <Page title="With React">
   <NavBar />
-
-  <div>
-    <ReactCounter client:load />
-    <ReactCounter />
-    <ReactCounter />
+  <div class="h-full grid items-center">
+    <div class="flex gap-10 justify-center">
+      <ReactCounter client:load />
+      <ReactCounter />
+      <ReactCounter />
+    </div>
   </div>
 </Page>
