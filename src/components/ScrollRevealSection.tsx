@@ -4,19 +4,21 @@ import React, { useEffect, useRef, useState } from "react";
 type ScrollReavealSectionProps = {
   text: string;
   startOffset?: number; // start offset from viewport top.
-  endOffset?: number; // end offset from viewport top. 
+  endOffset?: number; // end offset from viewport top.
+  mode?: "background" | "opacity";
 }
 
-export default function ScrollReavealSection ({ text, startOffset = .9, endOffset = .2 }: ScrollReavealSectionProps) {
-  const [bgSize, setBgSize] = useState(0);
+export default function ScrollReavealSection ({ text, startOffset = .9, endOffset = .2, mode = "background" }: ScrollReavealSectionProps) {
+  const [progress, setProgress] = useState(0);
 
   const elementRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const sectionEl = elementRef.current;
 
-    const calculateBgSize = () => {
+    const calculateProgress = () => {
       if (!sectionEl) return;
+
       const rect = sectionEl.getBoundingClientRect();
       const vh = window.innerHeight;
 
@@ -27,38 +29,62 @@ export default function ScrollReavealSection ({ text, startOffset = .9, endOffse
       const pos = start - rect.y;
       const p = pos / distance;
       
-      setBgSize(Math.max(0, p * 100));
+      setProgress(
+        Math.min(Math.max(0, p), 1)
+      );
     };
 
-    calculateBgSize();
+    calculateProgress();
 
-    window.addEventListener("scroll", calculateBgSize);
-    window.addEventListener("resize", calculateBgSize);
+    window.addEventListener("scroll", calculateProgress);
+    window.addEventListener("resize", calculateProgress);
     
     return () => {
-      window.removeEventListener("scroll", calculateBgSize);
-      window.removeEventListener("resize", calculateBgSize);
+      window.removeEventListener("scroll", calculateProgress);
+      window.removeEventListener("resize", calculateProgress);
     };
   }, []);
   
+  const chars = text.split("");
 
   return (
     <section
       className="h-screen flex justify-center items-center p-40"
     >
-      <p ref={elementRef}>
-        <span
-          className={clsx(
-            "bg-linear-to-r from-cyan-500 to-blue-500 bg-clip-text",
-            "bg-no-repeat",
-            "text-white/10 text-2xl ",
+      <p ref={elementRef} className="text-2xl">
+        {mode === "background" && (
+          <span
+            className={clsx(
+              "bg-linear-to-r from-white to-white bg-clip-text",
+              "bg-no-repeat",
+              "text-white/10",
 
-          )}
-          style={{ backgroundSize: `${bgSize}%` }}
-        >
-          
-          {text}
-        </span>
+            )}
+            style={{ backgroundSize: `${progress * 100}%` }}
+          >
+            
+            {text}
+          </span>
+        )}
+
+        {mode === "opacity" && (
+          <span>
+            {chars.map((char, index, arr) => (
+              <span
+                key={index}
+                className={clsx(
+                  "text-white",
+                  {
+                    "opacity-10": index >= progress * arr.length,
+                  }
+                )}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
+        )}
+        
       </p>
     </section>
   );
