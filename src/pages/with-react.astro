@@ -1,11 +1,14 @@
 ---
-import Page from '~/layouts/Page.astro';
-import NavBar from '~/components/NavBar.astro';
+import Page from "~/layouts/Page.astro";
+import NavBar from "~/components/NavBar.astro";
+
+function name () {
+}
+
+name();
 ---
 
-<Page
-	title="With React"
->
-	<NavBar />
-<!-- HELLO WORLD -->
+<Page title="With React">
+  <NavBar />
+  <img src="https://example.com" alt="the example" />
 </Page>
