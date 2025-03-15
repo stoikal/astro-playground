@@ -22,7 +22,9 @@ export default [
       "@stylistic/js/indent": ["error", 2],
       "@stylistic/js/quotes": ["error", "double"],
       "@stylistic/js/semi": "error",
-      "@stylistic/js/space-before-function-paren": ["error", "always"]
+      "@stylistic/js/space-before-function-paren": ["error", "always"],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unsafe-function-type": "warn"
     }
   }
 ];
