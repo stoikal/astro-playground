@@ -1,6 +1,7 @@
 ---
 import Page from "~/layouts/Page.astro";
 import NavBar from "~/components/NavBar.astro";
+import ReactCounter from "~/components/ReactCounter";
 
 function name () {
 }
@@ -10,5 +11,10 @@ name();
 
 <Page title="With React">
   <NavBar />
-  <img src="https://example.com" alt="the example" />
+
+  <div>
+    <ReactCounter client:load />
+    <ReactCounter />
+    <ReactCounter />
+  </div>
 </Page>
