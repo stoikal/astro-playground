@@ -1,0 +1,48 @@
+---
+import { Image, Picture } from "astro:assets";
+import image1 from "~/assets/pic/Dok KLB INI IKJ_29 Oktober 2022_BW crop.jpeg";
+import image2 from "~/assets/pic/Kampus IKJ_1_A4_koleksi Perpustakaan IKJ.jpeg";
+import image3 from "~/assets/pic/Kampus IKJ_2_koleksi Perpustakaan IKJ.jpeg";
+import image4 from "~/assets/pic/Sanggar Melukis di Kampus IKJ 3_koleksi Perpustakaan IKJ.jpeg";
+import image5 from "~/assets/pic/arsip dokumentasi  LPKJ 1970-an_001_koleksi Facebook ruang arsip IKJ LPKJ.jpeg";
+import image6 from "~/assets/pic/arsip dokumentasi LPKJ 1970-an_008_koleksi Facebook ruang arsip IKJ LPKJ.jpeg";
+---
+
+<div class="grid grid-cols-3 grid-rows-2">
+  <Picture
+    src={image1}
+    alt="asf"
+    height={400}
+    class="object-cover w-96 h-96"
+  />
+  <Picture
+    src={image2}
+    alt="asf"
+    height={400}
+    class="object-cover w-96 h-96"
+  />
+  <Picture
+    src={image3}
+    alt="asf"
+    height={400}
+    class="object-cover w-96 h-96"
+  />
+  <Image
+    src={image4}
+    alt="asf"
+    height={400}
+    class="object-cover w-96 h-96"
+  />
+  <Image
+    src={image5}
+    alt="asf"
+    height={400}
+    class="object-cover w-96 h-96"
+  />
+  <Image
+    src={image6}
+    alt="asf"
+    height={400}
+    class="object-cover w-96 h-96"
+  />
+</div>
